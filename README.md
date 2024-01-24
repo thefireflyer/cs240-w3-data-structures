@@ -1,5 +1,7 @@
 # CS 240 | Week 3 | Data Structures
 
+[![Unit testing](https://github.com/thefireflyer/data-structuresc/actions/workflows/dotnet.yml/badge.svg)](https://github.com/thefireflyer/data-structuresc/actions/workflows/dotnet.yml)
+
 | | |
 |-|-|
 | Author | Aidan Beil |
