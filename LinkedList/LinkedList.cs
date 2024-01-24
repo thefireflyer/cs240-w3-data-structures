@@ -48,7 +48,7 @@ class LinkedList<T> where T : IComparable<T>
             throw new Exception("invalid arguments!");
         }
         // as in the rust impl, we'll handle head
-        // inserts seperately.
+        // inserts separately.
         if (index == 0)
         {
             this.head = new Node<T>(value, head, null);

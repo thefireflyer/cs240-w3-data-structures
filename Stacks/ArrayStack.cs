@@ -45,35 +45,32 @@ class ArrayStack<T> : IStack<T> where T : IComparable<T>
 
     public bool IsFull()
     {
-        return cursor + 1 == inner.Length; // size == inner.Length
+        return cursor + 1 >= inner.Length; // size >= inner.Length
     }
 
     //-----------------------------------------------------------------------//
 
     public void Push(T value)
     {
+        // Move our cursor forward so we're pointing to a fresh slot
         cursor++;
 
-        if (cursor >= inner.Length)
+        if (IsFull())
         {
+            // Create a new inner list with twice the size plus 1 extra slot
             T[] list = new T[inner.Length * 2 + 1];
 
+            // Copy the contents of the old list onto the new list
             for (int i = 0; i < inner.Length; i++)
             {
                 list[i] = inner[i];
             }
 
+            // Set our inner field to our new list
             inner = list;
         }
-        // Console.WriteLine(cursor);
-        // Console.WriteLine(inner.Capacity);
-        // Console.WriteLine("----");
-        // foreach (var item in inner)
-        // {
-        //     Console.WriteLine(item);
-        // }
-        // Console.WriteLine("----\n\n");
 
+        // Set the slot to `value`
         inner[cursor] = value;
     }
 
@@ -86,9 +83,13 @@ class ArrayStack<T> : IStack<T> where T : IComparable<T>
             throw new Exception("Cannot pop empty stack");
         }
 
+        // Save the value of the current head 
         T value = inner[cursor];
+
+        // Equivalent to popping the head
         cursor--;
 
+        // Return our saved head value
         return value;
     }
 
@@ -101,6 +102,7 @@ class ArrayStack<T> : IStack<T> where T : IComparable<T>
             throw new Exception("Cannot peek into empty stack");
         }
 
+        // Just return the value of the current head
         return inner[cursor];
     }
 

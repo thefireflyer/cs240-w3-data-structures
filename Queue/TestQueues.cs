@@ -15,7 +15,7 @@ public class TestQueues<TQueue>
     [Test]
     public void TestBasics()
     {
-        TQueue queue = new TQueue();
+        TQueue queue = new();
         Assert.That(queue.IsEmpty());
         queue.Enqueue(1);
         queue.Enqueue(2);
@@ -38,9 +38,36 @@ public class TestQueues<TQueue>
         queue.Enqueue(3);
         queue.Enqueue(2);
         queue.Enqueue(1);
-        Assert.That(!queue.IsEmpty());
-        Assert.That(queue.Peek(), Is.EqualTo(3));
-        Assert.That(queue.Dequeue(), Is.EqualTo(3));
+        Assert.Multiple(() =>
+        {
+            Assert.That(!queue.IsEmpty());
+            Assert.That(queue.Peek(), Is.EqualTo(3));
+            Assert.That(queue.Dequeue(), Is.EqualTo(3));
+        });
+        queue.Enqueue(4);
+        Assert.Multiple(() =>
+        {
+            Assert.That(!queue.IsEmpty());
+            Assert.That(queue.Peek(), Is.EqualTo(2));
+        });
+        queue.Enqueue(5);
+        Assert.Multiple(() =>
+        {
+            Assert.That(!queue.IsEmpty());
+            Assert.That(queue.Peek(), Is.EqualTo(2));
+            Assert.That(queue.Dequeue(), Is.EqualTo(2));
+            Assert.That(!queue.IsEmpty());
+            Assert.That(queue.Peek(), Is.EqualTo(1));
+            Assert.That(queue.Dequeue(), Is.EqualTo(1));
+            Assert.That(!queue.IsEmpty());
+            Assert.That(queue.Peek(), Is.EqualTo(4));
+            Assert.That(queue.Dequeue(), Is.EqualTo(4));
+            Assert.That(!queue.IsEmpty());
+            Assert.That(queue.Peek(), Is.EqualTo(5));
+            Assert.That(queue.Dequeue(), Is.EqualTo(5));
+            Assert.That(queue.IsEmpty());
+            Assert.That(!queue.IsFull());
+        });
     }
 }
 
