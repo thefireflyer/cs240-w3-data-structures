@@ -19,7 +19,7 @@
 - Queues
     - [interface](Queue/IQueue.cs)
     - using linked lists - [`LinkedQueue`](Queue/LinkedQueue.cs)
-    - using arrays - [`LinkedQueue`](Queue/ArrayQueue.cs)
+    - using arrays - [`ArrayQueue`](Queue/ArrayQueue.cs)
     - [unit testing](Queue/TestQueues.cs)
 
 `dotnet test`
