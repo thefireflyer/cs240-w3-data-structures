@@ -45,10 +45,10 @@ class ArrayQueue<T> : IQueue<T> where T : System.IComparable<T>
             throw new Exception("Cannot dequeue from an empty queue!");
         }
 
-        // Save the value of the front item
+        // Save the value of the front slot
         T value = inner[dequeuePos];
 
-        // Increment the front pointer to the next item and wrap around if
+        // Increment the front pointer to the next slot and wrap around if
         // needed. This is equivalent to popping the front element.
         dequeuePos = (dequeuePos + 1) % inner.Length;
 
@@ -67,7 +67,7 @@ class ArrayQueue<T> : IQueue<T> where T : System.IComparable<T>
             // and get stuck in a size 1 array
             T[] list = new T[inner.Length * 2 + 2];
 
-            // Copy old contents
+            // Copy the contents of the old list onto the new list
             for (int i = 0; i < inner.Length; i++)
             {
                 list[i] = inner[i];
@@ -97,10 +97,16 @@ class ArrayQueue<T> : IQueue<T> where T : System.IComparable<T>
     public bool IsFull()
     {
         /*
-        There are two cases where our queue is full
-        (1) our enqueue slot the last slot in the array (or out of bounds)
-        (2) our enqueue slot is directly before our dequeue slot
-                may happen after wrapping
+        There are 3 cases where our queue is full:
+        (1) our enqueue slot is the last slot in the array 
+                (default case, avoids weird wrapping problems)
+
+        (2) our enqueue slot is out of bounds 
+                (this should only happen when inner is empty)
+
+        (3) our enqueue slot is directly before our dequeue slot
+                (this can happen after wrapping)
+
         */
         return enqueuePos >= inner.Length - 1 || enqueuePos == dequeuePos - 1;
     }

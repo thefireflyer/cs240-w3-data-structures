@@ -58,6 +58,7 @@ class ArrayStack<T> : IStack<T> where T : IComparable<T>
         if (IsFull())
         {
             // Create a new inner list with twice the size plus 1 extra slot
+            // We need the extra slot so an empty list will not remain empty
             T[] list = new T[inner.Length * 2 + 1];
 
             // Copy the contents of the old list onto the new list

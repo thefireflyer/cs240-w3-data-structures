@@ -2,7 +2,7 @@ namespace TestProject1;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-/// A common interface for Stack strucutes
+/// A common interface for Stack structures
 public interface IStack<T> where T : IComparable<T>
 {
     /// Return and remove the top of the stack

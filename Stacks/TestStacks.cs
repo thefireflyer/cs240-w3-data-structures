@@ -21,25 +21,30 @@ public class TestStacks<TStack>
         stack.Push(2);
         stack.Push(3);
         Assert.That(!stack.IsEmpty());
-        Assert.That(stack.Peek(), Is.EqualTo(3));
-        Assert.That(stack.Pop(), Is.EqualTo(3));
-        Assert.That(!stack.IsEmpty());
-        Assert.That(stack.Peek(), Is.EqualTo(2));
-        Assert.That(stack.Pop(), Is.EqualTo(2));
-        Assert.That(!stack.IsEmpty());
-        Assert.That(stack.Peek(), Is.EqualTo(1));
-        Assert.That(stack.Pop(), Is.EqualTo(1));
-        Assert.That(stack.IsEmpty());
-        Assert.That(!stack.IsFull());
+        Assert.Multiple(() =>
+        {
+            Assert.That(stack.Peek(), Is.EqualTo(3));
+            Assert.That(stack.Pop(), Is.EqualTo(3));
+            Assert.That(!stack.IsEmpty());
+            Assert.That(stack.Peek(), Is.EqualTo(2));
+            Assert.That(stack.Pop(), Is.EqualTo(2));
+            Assert.That(!stack.IsEmpty());
+            Assert.That(stack.Peek(), Is.EqualTo(1));
+            Assert.That(stack.Pop(), Is.EqualTo(1));
+            Assert.That(stack.IsEmpty());
+            Assert.That(!stack.IsFull());
+        });
 
         stack.Push(3);
         stack.Push(2);
         stack.Push(1);
-        Assert.That(!stack.IsEmpty());
-        Assert.That(stack.Peek(), Is.EqualTo(1));
-        Assert.That(stack.Pop(), Is.EqualTo(1));
+        Assert.Multiple(() =>
+        {
+            Assert.That(!stack.IsEmpty());
+            Assert.That(stack.Peek(), Is.EqualTo(1));
+            Assert.That(stack.Pop(), Is.EqualTo(1));
+        });
     }
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
